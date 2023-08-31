@@ -9,9 +9,12 @@ async function main() {
 
     console.log("Balance:", (await deployer.provider.getBalance(deployer.address)));
 
-    const auction = await hre.ethers.deployContract("Auction");
+    const Auction = await hre.ethers.getContractFactory("Auction");
+    const auction = await Auction.deploy(); // Use the deploy() function
 
-    console.log("Bank deployed to:", await auction.getAddress());
+    await auction.deployed(); // Wait for the deployment to be confirmed
+
+    console.log("Auction deployed to:", auction.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
